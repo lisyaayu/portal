@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Academic Portal - Lisya Ayu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            rose: '#FFE4E8',
+                            blush: '#FFC0CB',
+                            pink: '#FFB6C1',
+                            hot: '#FF69B4',
+                            deep: '#E05297',
+                            dark: '#2A1B24',
+                            cardDark: '#362230',
+                            textDark: '#FCE7F3'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --bg-primary: #FFF0F5;
+            --card-bg: rgba(255, 255, 255, 0.82);
+            --border-color: rgba(255, 182, 193, 0.45);
+            --text-main: #4A3E4E;
+        }
+
+        .dark {
+            --bg-primary: #1F141A;
+            --card-bg: rgba(42, 27, 36, 0.85);
+            --border-color: rgba(224, 82, 151, 0.3);
+            --text-main: #FCE7F3;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.25) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.15) 0%, transparent 25%);
+            background-attachment: fixed;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+        }
+
+        .gradient-pastel-btn {
+            background: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 50%, #E05297 100%);
+            box-shadow: 0 10px 20px -5px rgba(255, 105, 180, 0.4);
+        }
+
+        .gradient-pastel-btn:hover {
+            box-shadow: 0 15px 25px -3px rgba(255, 105, 180, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .glow-pink-hover:hover {
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.35);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 228, 232, 0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB6C1;
+            border-radius: 20px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF69B4;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.03); }
+        }
+        .animate-glow {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+
+        <!-- Top Navigation Bar & Dark Mode Toggle -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-2xl gradient-pastel-btn flex items-center justify-center text-white text-base shadow-md">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <span class="font-extrabold text-lg tracking-tight font-poppins text-pink-600 dark:text-pink-300">
+                    Tasky<span class="text-pink-400 dark:text-pink-400 font-light">Pastel</span>
+                </span>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleDarkMode()" class="glass-panel p-2.5 rounded-2xl text-pink-500 dark:text-pink-300 hover:scale-105 active:scale-95 transition-all cute-shadow">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Header & Hero Banner -->
+        <header class="glass-panel rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden shadow-xl border-pink-200/50">
+            <div class="absolute -right-12 -top-12 w-48 h-48 bg-pink-300/40 dark:bg-pink-600/20 rounded-full blur-3xl animate-glow pointer-events-none"></div>
+            <div class="absolute -left-12 -bottom-12 w-48 h-48 bg-rose-200/50 dark:bg-pink-800/20 rounded-full blur-3xl animate-glow pointer-events-none" style="animation-delay: 2s;"></div>
+
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-6 relative z-10">
+                <div class="text-center lg:text-left space-y-2 max-w-xl">
+                    <div class="inline-flex items-center gap-2 bg-pink-100/80 dark:bg-pink-950/60 text-pink-600 dark:text-pink-300 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-pink-200 dark:border-pink-800">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Welcome back, Lisya! ✨
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-gray-800 dark:text-pink-100 font-poppins leading-tight">
+                        Portal Pengumpulan <span class="bg-gradient-to-r from-pink-500 to-rose-500 bg-clip-text text-transparent">Tugas Kuliah</span>
+                    </h1>
+                    <p class="text-xs sm:text-sm text-gray-500 dark:text-pink-200/70 leading-relaxed">
+                        Kelola tugas pemrograman dan perkuliahan kamu dengan sistem pelacakan otomatis yang rapi dan elegan.
+                    </p>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="w-full lg:w-auto glass-panel p-4 sm:p-5 rounded-2xl border border-pink-200/60 dark:border-pink-800/50 shadow-md flex items-center gap-4 hover:border-pink-400 transition-all">
+                    <div class="relative">
+                        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Lisya&backgroundColor=ffcce0,ffdfbf" alt="Avatar" class="w-16 h-16 rounded-2xl bg-pink-100 border-2 border-pink-300 object-cover shadow-inner">
+                        <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 border-2 border-white dark:border-gray-800 rounded-full shadow-sm"></span>
+                    </div>
+                    <div class="text-left">
+                        <h2 class="font-bold text-gray-800 dark:text-pink-100 text-sm sm:text-base font-poppins flex items-center gap-1.5">
+                            Lisya Ayu Mutiara Ramadhani
+                            <i class="fa-solid fa-circle-check text-pink-500 text-xs" title="Verified Student"></i>
+                        </h2>
+                        <div class="text-xs text-gray-500 dark:text-pink-300/80 space-y-0.5 mt-1 font-medium">
+                            <p><span class="text-pink-500 font-semibold">NIM:</span> 240511108 <span class="mx-1">•</span> <span class="text-pink-500 font-semibold">Kelas:</span> TI24D</p>
+                            <p><span class="text-pink-500 font-semibold">Prodi:</span> Teknik Informatika</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Widgets Statistik -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8">
+            <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-pink-400 shadow-sm">
+                <span class="text-xs font-semibold text-gray-500 dark:text-pink-300/70 uppercase tracking-wider">Total Tugas</span>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800 dark:text-pink-100 mt-2" id="stat-total">0</div>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-emerald-400 shadow-sm">
+                <span class="text-xs font-semibold text-gray-500 dark:text-pink-300/70 uppercase tracking-wider">Selesai</span>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800 dark:text-pink-100 mt-2" id="stat-completed">0</div>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-amber-400 shadow-sm">
+                <span class="text-xs font-semibold text-gray-500 dark:text-pink-300/70 uppercase tracking-wider">Dalam Review</span>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800 dark:text-pink-100 mt-2" id="stat-pending">0</div>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-rose-400 shadow-sm">
+                <span class="text-xs font-semibold text-gray-500 dark:text-pink-300/70 uppercase tracking-wider">Perlu Revisi</span>
+                <div class="text-2xl sm:text-3xl font-extrabold text-gray-800 dark:text-pink-100 mt-2" id="stat-revision">0</div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+
+            <!-- Form Kirim Tugas -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel rounded-3xl p-6 sm:p-7 shadow-xl border-pink-200/50 sticky top-6">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-pink-100 dark:border-pink-900/50">
+                        <div class="w-11 h-11 rounded-2xl gradient-pastel-btn text-white flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800 dark:text-pink-100 font-poppins">Kirim Tugas Baru</h3>
+                            <p class="text-xs text-gray-500 dark:text-pink-300/70">Isi kelengkapan dokumen tugas perkuliahan</p>
+                        </div>
+                    </div>
+
+                    <form id="submission-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-pink-200 uppercase tracking-wider mb-1.5">Nama Tugas / Pertemuan <span class="text-pink-500">*</span></label>
+                            <input type="text" id="assignment-title" placeholder="Contoh: Tugas 4 - Linked List" required class="w-full bg-white/70 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 rounded-2xl px-4 py-2.5 text-xs text-gray-800 dark:text-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                        </div>
+
+                        <!-- Mata Kuliah dengan Fitur History / Datalist -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-pink-200 uppercase tracking-wider mb-1.5">Mata Kuliah <span class="text-pink-500">*</span></label>
+                            <input type="text" id="course" list="course-history-list" placeholder="Ketik atau pilih dari riwayat matkul..." required class="w-full bg-white/70 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 rounded-2xl px-4 py-2.5 text-xs text-gray-800 dark:text-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                            <!-- Datalist otomatis menyimpan riwayat mata kuliah yang pernah diinput -->
+                            <datalist id="course-history-list">
+                                <!-- Terisi otomatis lewat JavaScript -->
+                            </datalist>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-pink-200 uppercase tracking-wider mb-1.5">Link Repository / Cloud Drive (Opsional)</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-pink-400">
+                                    <i class="fa-solid fa-link text-xs"></i>
+                                </span>
+                                <input type="url" id="project-link" placeholder="https://github.com/... atau Drive" class="w-full bg-white/70 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 rounded-2xl pl-9 pr-4 py-2.5 text-xs text-gray-800 dark:text-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-pink-200 uppercase tracking-wider mb-1.5">Catatan Tambahan</label>
+                            <textarea id="notes" rows="2" placeholder="Tuliskan catatan khusus..." class="w-full bg-white/70 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 rounded-2xl px-4 py-2.5 text-xs text-gray-800 dark:text-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-400"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 dark:text-pink-200 uppercase tracking-wider mb-1.5">Upload Lampiran Berkas <span class="text-pink-500">*</span></label>
+                            <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-pink-300 dark:border-pink-700 hover:border-pink-500 bg-pink-50/40 dark:bg-pink-950/20 rounded-2xl p-5 text-center cursor-pointer transition-all">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-pink-400 mb-2 animate-bounce"></i>
+                                <p class="text-xs text-gray-700 dark:text-pink-200 font-semibold">Tarik & Letakkan berkas di sini atau <span class="text-pink-500 underline">Cari</span></p>
+                                <input type="file" id="file-input" required class="hidden" onchange="handleFileSelect(event)">
+                            </div>
+                            <div id="file-info" class="hidden mt-2 p-3 bg-pink-100/70 dark:bg-pink-900/40 rounded-xl flex items-center justify-between text-xs text-pink-900 dark:text-pink-200">
+                                <div class="flex items-center gap-2 truncate">
+                                    <i class="fa-solid fa-file-code text-pink-500 text-sm"></i>
+                                    <span id="file-name" class="font-medium truncate">file.pdf</span>
+                                </div>
+                                <button type="button" onclick="removeSelectedFile()" class="text-pink-600 hover:text-rose-500 p-1"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="w-full gradient-pastel-btn text-white font-bold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-2 text-xs uppercase tracking-wider transition-all transform active:scale-95">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Tugas Sekarang
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- List Tugas & Search -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="glass-panel p-5 rounded-3xl shadow-xl border-pink-200/50 space-y-4">
+                    <div class="relative w-full">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-pink-400">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </span>
+                        <input type="text" id="search-input" oninput="renderSubmissions()" placeholder="Cari berdasarkan tanggal (cth: 25 Oktober), nama tugas, atau mata kuliah..." class="w-full bg-white/70 dark:bg-pink-950/40 border border-pink-200 dark:border-pink-800 rounded-2xl pl-9 pr-3 py-2 text-xs text-gray-800 dark:text-pink-100 focus:outline-none focus:ring-2 focus:ring-pink-400">
+                    </div>
+
+                    <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold">
+                        <button onclick="setFilterStatus('ALL')" id="tab-ALL" class="tab-btn active px-4 py-2 rounded-xl bg-pink-500 text-white shadow-sm transition-all whitespace-nowrap">Semua</button>
+                        <button onclick="setFilterStatus('Selesai')" id="tab-Selesai" class="tab-btn px-4 py-2 rounded-xl bg-pink-100/60 dark:bg-pink-950/40 text-pink-700 dark:text-pink-300 hover:bg-pink-200 transition-all whitespace-nowrap">Selesai</button>
+                        <button onclick="setFilterStatus('Menunggu Review')" id="tab-Menunggu Review" class="tab-btn px-4 py-2 rounded-xl bg-pink-100/60 dark:bg-pink-950/40 text-pink-700 dark:text-pink-300 hover:bg-pink-200 transition-all whitespace-nowrap">Menunggu Review</button>
+                        <button onclick="setFilterStatus('Perlu Revisi')" id="tab-Perlu Revisi" class="tab-btn px-4 py-2 rounded-xl bg-pink-100/60 dark:bg-pink-950/40 text-pink-700 dark:text-pink-300 hover:bg-pink-200 transition-all whitespace-nowrap">Perlu Revisi</button>
+                    </div>
+                </div>
+
+                <div id="cards-container" class="space-y-4"></div>
+
+                <div id="empty-state" class="hidden glass-panel text-center py-12 rounded-3xl border-pink-200/50">
+                    <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900/40 text-pink-400 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-700 dark:text-pink-200 font-poppins text-sm">Tidak Ada Tugas Ditemukan</h4>
+                    <p class="text-xs text-gray-400 dark:text-pink-300/60 mt-1">Coba cari dengan kata kunci lain atau kirim tugas baru.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detail, Preview File & Update Status -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="glass-panel bg-white dark:bg-pastel-cardDark rounded-3xl p-6 max-w-lg w-full shadow-2xl border-2 border-pink-200 dark:border-pink-800 space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-pink-100 dark:border-pink-900/50">
+                <h3 class="font-bold text-pink-600 dark:text-pink-300 font-poppins text-base flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i> Detail, Preview & Update Status
+                </h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-pink-500"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div id="modal-body" class="space-y-3 text-xs max-h-[60vh] overflow-y-auto pr-1"></div>
+
+            <div class="pt-3 border-t border-pink-100 dark:border-pink-900/50 flex justify-end gap-2">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 dark:bg-pink-950 text-gray-700 dark:text-pink-200 font-semibold rounded-xl text-xs">Tutup</button>
+                <button onclick="saveModalChanges()" class="gradient-pastel-btn text-white font-semibold px-4 py-2 rounded-xl text-xs">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        let submissions = [];
+        let courseHistory = [];
+        let currentStatusFilter = 'ALL';
+        let selectedFileObj = null;
+        let activeModalId = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('lisya_aesthetic_portal_data');
+            const savedCourses = localStorage.getItem('lisya_course_history');
+            
+            if (saved) submissions = JSON.parse(saved);
+            if (savedCourses) courseHistory = JSON.parse(savedCourses);
+
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun text-lg text-amber-300';
+            }
+
+            updateCourseDatalist();
+            renderSubmissions();
+        });
+
+        function saveToStorage() {
+            localStorage.setItem('lisya_aesthetic_portal_data', JSON.stringify(submissions));
+            localStorage.setItem('lisya_course_history', JSON.stringify(courseHistory));
+        }
+
+        function updateCourseDatalist() {
+            const datalist = document.getElementById('course-history-list');
+            datalist.innerHTML = '';
+            courseHistory.forEach(course => {
+                const opt = document.createElement('option');
+                opt.value = course;
+                datalist.appendChild(opt);
+            });
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                icon.className = 'fa-solid fa-moon text-lg text-pink-500';
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'fa-solid fa-sun text-lg text-amber-300';
+            }
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFileObj = file;
+                document.getElementById('file-name').innerText = `${file.name} (${formatBytes(file.size)})`;
+                document.getElementById('file-info').classList.remove('hidden');
+            }
+        }
+
+        function removeSelectedFile() {
+            selectedFileObj = null;
+            document.getElementById('file-input').value = '';
+            document.getElementById('file-info').classList.add('hidden');
+        }
+
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('assignment-title').value;
+            const course = document.getElementById('course').value.trim();
+            const link = document.getElementById('project-link').value;
+            const notes = document.getElementById('notes').value || 'Tidak ada catatan tambahan.';
+            const fileInput = document.getElementById('file-input');
+
+            if (!selectedFileObj && fileInput.files.length === 0) {
+                showToast('Mohon lampirkan berkas tugas!', 'error');
+                return;
+            }
+
+            const file = selectedFileObj || fileInput.files[0];
+            
+            // Simpan file ke URL Object lokal agar bisa di-preview / di-download kembali
+            const fileObjectURL = URL.createObjectURL(file);
+
+            // Simpan matkul ke riwayat jika belum ada
+            if (course && !courseHistory.includes(course)) {
+                courseHistory.push(course);
+                updateCourseDatalist();
+            }
+
+            const now = new Date();
+            // Format Tanggal & Bulan lengkap (Contoh: 25 Oktober 2026, 14:30)
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            const tanggalLengkap = now.toLocaleDateString('id-ID', options);
+            const jamStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            const dateStr = `${tanggalLengkap} pukul ${jamStr}`;
+
+            const newItem = {
+                id: Date.now().toString(),
+                title: title,
+                course: course,
+                link: link,
+                notes: notes,
+                fileName: file.name,
+                fileSize: formatBytes(file.size),
+                fileUrl: fileObjectURL,
+                date: dateStr,
+                status: 'Menunggu Review',
+                progress: 50
+            };
+
+            submissions.unshift(newItem);
+            saveToStorage();
+            renderSubmissions();
+
+            document.getElementById('submission-form').reset();
+            removeSelectedFile();
+            showToast('Tugas berhasil dikirim dan tersimpan! ✨', 'success');
+        }
+
+        function setFilterStatus(status) {
+            currentStatusFilter = status;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-4 py-2 rounded-xl bg-pink-100/60 dark:bg-pink-950/40 text-pink-700 dark:text-pink-300 hover:bg-pink-200 transition-all whitespace-nowrap';
+            });
+            const activeBtn = document.getElementById(`tab-${status}`);
+            if (activeBtn) {
+                activeBtn.className = 'tab-btn active px-4 py-2 rounded-xl bg-pink-500 text-white shadow-sm transition-all whitespace-nowrap';
+            }
+            renderSubmissions();
+        }
+
+        function renderSubmissions() {
+            const container = document.getElementById('cards-container');
+            const emptyState = document.getElementById('empty-state');
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+
+            container.innerHTML = '';
+
+            const filtered = submissions.filter(item => {
+                const matchStatus = currentStatusFilter === 'ALL' || item.status === currentStatusFilter;
+                const matchSearch = item.title.toLowerCase().includes(searchQuery) || 
+                                    item.course.toLowerCase().includes(searchQuery) || 
+                                    item.date.toLowerCase().includes(searchQuery);
+                return matchStatus && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+
+                filtered.forEach(item => {
+                    let badgeColor = '';
+                    if (item.status === 'Selesai') badgeColor = 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300';
+                    else if (item.status === 'Menunggu Review') badgeColor = 'bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-950 dark:text-amber-300';
+                    else badgeColor = 'bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-950 dark:text-rose-300';
+
+                    const card = document.createElement('div');
+                    card.className = 'glass-panel rounded-3xl p-5 shadow-lg border-pink-200/50 hover:border-pink-300 transition-all space-y-3';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start gap-3">
+                            <div>
+                                <span class="inline-block bg-pink-100 dark:bg-pink-950 text-pink-600 dark:text-pink-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full mb-1">
+                                    ${escapeHtml(item.course)}
+                                </span>
+                                <h4 class="font-bold text-gray-800 dark:text-pink-100 font-poppins text-sm sm:text-base">${escapeHtml(item.title)}</h4>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-[10px] font-bold border ${badgeColor} whitespace-nowrap">
+                                ${item.status}
+                            </span>
+                        </div>
+
+                        <div class="text-xs text-gray-500 dark:text-pink-300/70 space-y-1">
+                            <p class="font-medium text-pink-500 dark:text-pink-400"><i class="fa-regular fa-calendar-days mr-1"></i> ${escapeHtml(item.date)}</p>
+                            <p class="line-clamp-2"><i class="fa-solid fa-quote-left text-pink-400 mr-1"></i>${escapeHtml(item.notes)}</p>
+                            ${item.link ? `<p><a href="${escapeHtml(item.link)}" target="_blank" class="text-pink-500 hover:underline inline-flex items-center gap-1 font-medium"><i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Tautan Project/Drive</a></p>` : ''}
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="space-y-1 pt-1">
+                            <div class="flex justify-between text-[10px] font-semibold text-gray-400 dark:text-pink-300/60">
+                                <span>Progress Review</span>
+                                <span>${item.progress}%</span>
+                            </div>
+                            <div class="w-full bg-pink-100 dark:bg-pink-950 rounded-full h-1.5 overflow-hidden">
+                                <div class="gradient-pastel-btn h-full rounded-full" style="width: ${item.progress}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-pink-100 dark:border-pink-900/40 text-[11px]">
+                            <div class="flex items-center gap-2 text-gray-500 dark:text-pink-300/70 truncate max-w-[60%]">
+                                <span class="bg-white/80 dark:bg-pink-950/60 px-2.5 py-1 rounded-xl border border-pink-200 dark:border-pink-800 font-mono truncate">
+                                    <i class="fa-solid fa-paperclip text-pink-400 mr-1"></i>${escapeHtml(item.fileName)} (${item.fileSize})
+                                </span>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 ml-auto">
+                                <!-- Tombol Lihat / Preview File -->
+                                ${item.fileUrl ? `<a href="${item.fileUrl}" target="_blank" class="px-2.5 py-1.5 bg-pink-500 hover:bg-pink-600 text-white rounded-xl font-medium transition-all inline-flex items-center gap-1" title="Lihat/Download File"><i class="fa-solid fa-eye text-[10px]"></i> Lihat File</a>` : ''}
+                                <button onclick="openModal('${item.id}')" class="p-2 bg-pink-100 dark:bg-pink-900/50 hover:bg-pink-200 text-pink-700 dark:text-pink-200 rounded-xl transition-all" title="Detail & Status">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button onclick="deleteSubmission('${item.id}')" class="p-2 bg-rose-100 dark:bg-rose-950 hover:bg-rose-200 text-rose-700 dark:text-rose-300 rounded-xl transition-all" title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            document.getElementById('stat-total').innerText = submissions.length;
+            document.getElementById('stat-completed').innerText = submissions.filter(s => s.status === 'Selesai').length;
+            document.getElementById('stat-pending').innerText = submissions.filter(s => s.status === 'Menunggu Review').length;
+            document.getElementById('stat-revision').innerText = submissions.filter(s => s.status === 'Perlu Revisi').length;
+        }
+
+        function openModal(id) {
+            activeModalId = id;
+            const item = submissions.find(s => s.id === id);
+            if (!item) return;
+
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <div>
+                    <label class="block font-semibold text-gray-500 dark:text-pink-300/70 mb-1">Mata Kuliah</label>
+                    <p class="font-bold text-gray-800 dark:text-pink-100">${escapeHtml(item.course)}</p>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-500 dark:text-pink-300/70 mb-1">Nama Tugas</label>
+                    <p class="font-semibold text-pink-600 dark:text-pink-300">${escapeHtml(item.title)}</p>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-500 dark:text-pink-300/70 mb-1">Waktu Pengunggahan</label>
+                    <p class="font-medium text-gray-700 dark:text-pink-200">${escapeHtml(item.date)}</p>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-500 dark:text-pink-300/70 mb-1">Berkas Terlampir</label>
+                    <div class="flex items-center justify-between bg-pink-50 dark:bg-pink-950 p-2.5 rounded-xl border border-pink-200 dark:border-pink-800">
+                        <span class="font-mono text-pink-600 dark:text-pink-300 truncate">${escapeHtml(item.fileName)} (${item.fileSize})</span>
+                        ${item.fileUrl ? `<a href="${item.fileUrl}" target="_blank" class="px-3 py-1 bg-pink-500 hover:bg-pink-600 text-white rounded-lg text-[11px] font-medium"><i class="fa-solid fa-eye mr-1"></i> Buka File</a>` : 'Tidak ada file'}
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-500 dark:text-pink-300/70 mb-1">Ubah Status Tugas</label>
+                    <select id="modal-status" class="w-full bg-white/80 dark:bg-pink-950 border border-pink-200 dark:border-pink-800 rounded-xl p-2 font-medium">
+                        <option value="Menunggu Review" ${item.status === 'Menunggu Review' ? 'selected' : ''}>Menunggu Review</option>
+                        <option value="Selesai" ${item.status === 'Selesai' ? 'selected' : ''}>Selesai (Disetujui)</option>
+                        <option value="Perlu Revisi" ${item.status === 'Perlu Revisi' ? 'selected' : ''}>Perlu Revisi</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-500 dark:text-pink-300/70 mb-1">Update Progress (%)</label>
+                    <input type="number" id="modal-progress" min="0" max="100" value="${item.progress}" class="w-full bg-white/80 dark:bg-pink-950 border border-pink-200 dark:border-pink-800 rounded-xl p-2 font-medium">
+                </div>
+            `;
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+            activeModalId = null;
+        }
+
+        function saveModalChanges() {
+            if (!activeModalId) return;
+            const item = submissions.find(s => s.id === activeModalId);
+            if (item) {
+                item.status = document.getElementById('modal-status').value;
+                item.progress = parseInt(document.getElementById('modal-progress').value) || 0;
+                saveToStorage();
+                renderSubmissions();
+                showToast('Status tugas berhasil diperbarui!', 'success');
+            }
+            closeModal();
+        }
+
+        function deleteSubmission(id) {
+            if (confirm('Apakah kamu yakin ingin menghapus tugas ini?')) {
+                submissions = submissions.filter(s => s.id !== id);
+                saveToStorage();
+                renderSubmissions();
+                showToast('Tugas telah dihapus.', 'info');
+            }
+        }
+
+        function showToast(msg, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            let bg = 'bg-pink-600 text-white';
+            let icon = 'fa-circle-check';
+
+            if (type === 'error') {
+                bg = 'bg-rose-600 text-white';
+                icon = 'fa-circle-exclamation';
+            } else if (type === 'info') {
+                bg = 'bg-gray-800 text-white';
+                icon = 'fa-circle-info';
+            }
+
+            toast.className = `flex items-center gap-2 px-4 py-3 rounded-2xl text-xs font-medium shadow-2xl ${bg} transition-all duration-300 pointer-events-auto`;
+            toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-4');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
